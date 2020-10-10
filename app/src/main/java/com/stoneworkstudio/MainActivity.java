@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         //final SmsManager sms = SmsManager.getDefault();
         //sms.sendTextMessage("+923219517478",null,"andriod sms",null,null);
         SmsManager smsmanager = SmsManager.getDefault();
-        smsmanager.sendTextMessage("+923235537369", "+923000806458", "oks", null, null);
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy =
                     new StrictMode.ThreadPolicy.Builder().permitAll().build();
