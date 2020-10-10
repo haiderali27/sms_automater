@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.telephony.SmsManager;
 import android.widget.TextView;
 
+import com.stoneworkstudio.service.SMSService;
 import com.stoneworkstudio.sms.SMS;
 
 public class MainActivity extends AppCompatActivity {
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        startService(new Intent(this, SMSService.class));
 
     }
 }
