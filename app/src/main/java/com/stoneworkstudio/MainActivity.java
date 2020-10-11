@@ -5,11 +5,15 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.widget.TextView;
 
+import com.stoneworkstudio.database.DataBaseHelper;
+import com.stoneworkstudio.database.DatabaseAssetHelper;
 import com.stoneworkstudio.service.SMSService;
 import com.stoneworkstudio.sms.SMS;
 

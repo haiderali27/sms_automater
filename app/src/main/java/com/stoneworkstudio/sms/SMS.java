@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -14,6 +15,8 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.stoneworkstudio.database.DatabaseAssetHelper;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -54,7 +57,14 @@ public class SMS extends BroadcastReceiver {
                 this.destinationNumber =messages[0].getOriginatingAddress();
                 Log.v("SMS",message);
                 if(message.toUpperCase().startsWith("TKN#")){
-                    sendSMSByManager(this.destinationNumber, this.simSlot,"Your message"+message+" for Token is received by", context);
+                    String tokenNumber = message.substring(4,message.length());
+                    DatabaseAssetHelper obj = new DatabaseAssetHelper(context);
+                    Cursor cursor = obj.tokenExists(tokenNumber);
+                    if(cursor.getCount()==1){
+                        sendSMSByManager(this.destinationNumber, this.simSlot,"Your message"+message+" for Token is received and Your token is Registered in our database", context);
+                    }else{
+                        sendSMSByManager(this.destinationNumber, this.simSlot,"Your message"+message+" for Token is received and Your token is Not Registered in our database", context);
+                    }
                 }
                 // prevent any other broadcast receivers from receiving broadcast
                 // abortBroadcast();
