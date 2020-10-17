@@ -49,6 +49,7 @@ public class SMSService extends Service {
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
+        /*
         // TODO Auto-generated method stub
         Intent restartService = new Intent(getApplicationContext(),
                 this.getClass());
@@ -61,7 +62,7 @@ public class SMSService extends Service {
 
         AlarmManager alarmService = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
         alarmService.set(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() +100, restartServicePI);
-
+        */
 
     }
     @Override
