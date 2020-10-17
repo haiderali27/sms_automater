@@ -1,4 +1,4 @@
-package com.stoneworkstudio.autostart;
+package com.stoneworkstudio.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

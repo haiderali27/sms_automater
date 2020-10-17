@@ -1,4 +1,4 @@
-package com.stoneworkstudio.sms;
+package com.stoneworkstudio.receiver;
 
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
@@ -27,10 +27,10 @@ public class SMS extends BroadcastReceiver {
     private String destinationNumber;
     private Integer simSlot;
 
-    public  SMS(){
+    public SMS(){
         this.simSlot=0;
     }
-    public  SMS(Integer simSlot){
+    public SMS(Integer simSlot){
         this.simSlot = simSlot;
     }
 
@@ -53,17 +53,18 @@ public class SMS extends BroadcastReceiver {
                 }
                 String sender = messages[0].getOriginatingAddress();
                 String message = sb.toString();
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 this.destinationNumber =messages[0].getOriginatingAddress();
                 Log.v("SMS",message);
                 if(message.toUpperCase().startsWith("TKN#")){
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                     String tokenNumber = message.substring(4,message.length());
                     DatabaseAssetHelper obj = new DatabaseAssetHelper(context);
                     Cursor cursor = obj.tokenExists(tokenNumber);
                     if(cursor.getCount()==1){
-                        sendSMSByManager(this.destinationNumber, this.simSlot,"Your message"+message+" for Token is received and Your token is Registered in our database", context);
+                        sendSMSByManager(this.destinationNumber, this.simSlot,"Message: "+message+" for Token verification is received. ***Registered***", context);
                     }else{
-                        sendSMSByManager(this.destinationNumber, this.simSlot,"Your message"+message+" for Token is received and Your token is Not Registered in our database", context);
+                        sendSMSByManager(this.destinationNumber, this.simSlot,"Message: "+message+" for Token verification is received. ***Not Registered***", context);
                     }
                 }
                 // prevent any other broadcast receivers from receiving broadcast
